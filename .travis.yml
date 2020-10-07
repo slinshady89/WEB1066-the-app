@@ -5,7 +5,7 @@ jdk: oraclejdk8
 before_install:
   - echo "testing coming soon"
 
-script:
+install:
   - ./gradlew clean jar
 
 #script:
