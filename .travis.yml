@@ -1,6 +1,6 @@
-dist: xenial
+dist: trusty
 language: java
-jdk: openjdk8
+jdk: oraclejdk8
 
 #script:
   # Run ANSIBLE checks
