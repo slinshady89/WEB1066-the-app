@@ -18,9 +18,6 @@ env:
 script:
   - ./gradlew clean jar
 
-stages:
-  - test
-
 
 jobs:
   include:
