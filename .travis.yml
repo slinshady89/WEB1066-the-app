@@ -10,6 +10,7 @@ script:
 after_success:
   - ./gradlew test
 
+
 #script:
   # Run ANSIBLE checks
   # - ANSIBLE0008: Disabled for use of sudo warnings - to address
