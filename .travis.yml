@@ -2,7 +2,7 @@ install: skip
 os: linux
 dist: trusty
 language: java
-jdk: oraclejdk8
+#jdk: oraclejdk8
 
 
 env:
@@ -22,6 +22,7 @@ stages:
 jobs:
   include:
     - stage: jdk-targets
+      jdk: $JDK_VERSION
       name: "Test jdk 9"
       install: skip
       script:
@@ -32,7 +33,8 @@ jobs:
       env:
       - JDK_VERSION=oraclejdk9
     - stage: jdk-targets
-      name: "Test jdk 9"
+      jdk: $JDK_VERSION
+      name: "Test jdk 8"
       install: skip
       script:
         - ./gradlew clean jar
