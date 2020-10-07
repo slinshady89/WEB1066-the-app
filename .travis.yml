@@ -16,7 +16,7 @@ jobs:
     -name: cart_check
       - COVERAGE=0.25 ./gradlew -p ./monolithic/service/cart check
     -name: user_check
-      - COVERAGE=0.25E ./gradlew -p ./monolithic/service/user check
+      - COVERAGE=0.25 ./gradlew -p ./monolithic/service/user check
     -name: order_check
       - COVERAGE=0.25 ./gradlew -p ./monolithic/repository/order check
     -name: repo_cart_check
