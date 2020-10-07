@@ -7,7 +7,7 @@ script:
   - ./gradlew clean jar
 
 after_succes:
-  - echo "testing coming soon"
+  - ./gradlew test
 
 #script:
   # Run ANSIBLE checks
