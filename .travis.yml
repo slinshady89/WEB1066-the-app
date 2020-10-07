@@ -31,7 +31,6 @@ jobs:
         - COVERAGE=0.25 ./gradlew -p $TEST_CASE
       env:
       - JDK_VERSION=oraclejdk9
-  include:
     - stage: jdk-targets
       name: "Test jdk 9"
       install: skip
