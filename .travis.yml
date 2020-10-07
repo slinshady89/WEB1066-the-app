@@ -15,7 +15,7 @@ script:
 before_deploy:
   - ./gradlew test jacocoTestCoverageVerification
 
-deploy: skip
+#deploy: skip
 
 
 
