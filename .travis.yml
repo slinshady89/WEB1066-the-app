@@ -5,6 +5,9 @@ jdk: oraclejdk8
 before_install:
   - echo "testing coming soon"
 
+install:
+  - gradlew clean jar
+
 #script:
   # Run ANSIBLE checks
   # - ANSIBLE0008: Disabled for use of sudo warnings - to address
