@@ -8,7 +8,7 @@ before_install:
   - ./gradlew clean jar
 
 after_success:
-  - echo "testing coming soon"
+  - ./gradlew test
   - echo $TRAVIS_TEST_RESULT
 
 #script:
