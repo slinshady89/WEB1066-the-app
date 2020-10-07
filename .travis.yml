@@ -1,9 +1,8 @@
-install: skip
 dist: trusty
 language: java
 jdk: oraclejdk8
 
-script:
+before_install:
   - ./gradlew clean jar
 
 after_succes:
