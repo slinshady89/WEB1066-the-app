@@ -7,7 +7,7 @@ jdk: oraclejdk8
 before_install:
   - ./gradlew clean jar
 
-after_succes:
+after_success:
   - echo "testing coming soon"
   - echo $TRAVIS_TEST_RESULT
 
