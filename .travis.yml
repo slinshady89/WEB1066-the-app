@@ -9,7 +9,6 @@ before_install:
 
 after_success:
   - ./gradlew test
-  - echo $TRAVIS_TEST_RESULT
 
 #script:
   # Run ANSIBLE checks
