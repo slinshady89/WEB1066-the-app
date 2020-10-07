@@ -6,7 +6,7 @@ jdk: oraclejdk8
 
 
 env:
-  - TEST_CASE=./monolithic/ui_check
+  - TEST_CASE=./monolithic/ui check
   - TEST_CASE=./monolithic/service/cart check
   - TEST_CASE=./monolithic/service/user check
   - TEST_CASE=./monolithic/repository/order check
@@ -21,18 +21,29 @@ script:
 stages:
   - test
 
+
 jobs:
   include:
-    -stage: test
-      -name: jacocoTestReport
-      -install: skip
-      -script:
-        - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-    -stage: test
-      -name: $TEST_CASE
-      install: skip
-      -script:
-        - COVERAGE=0.25 ./gradlew -p $TEST_CASE
+  - name: "ui_check"
+    env: TEST_CASE=./monolithic/ui check
+  - name: "cart_check"
+    env: - TEST_CASE=./monolithic/service/cart check
+  - name: "user_check"
+    env: - TEST_CASE=./monolithic/service/user check
+  - name: "order_check"
+    env: - TEST_CASE=./monolithic/repository/order check
+  - name: "repo_cart_check"
+    env: - TEST_CASE=./monolithic/repository/cart check
+  - name: "prod_check"
+    env: - TEST_CASE=./monolithic/repository/product check
+  - name: "repo_user_check"
+    env: - TEST_CASE=./monolithic/repository/user check
+
+
+after_script:
+  - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
+  - COVERAGE=0.25 ./gradlew -p $TEST_CASE
+
 
 
 
