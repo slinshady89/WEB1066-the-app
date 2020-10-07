@@ -10,8 +10,10 @@ script:
 
 jobs:
   allow_failures:
-    - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-    - COVERAGE=0.25 ./gradlew -p ./monolithic/ui_check
+    -name: jacocoTestReport
+      - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
+    -name: ui_check
+    - COVERAGE=0.25 ./gradlew -p ./monolithic/ui check
     - COVERAGE=0.25 ./gradlew -p ./monolithic/service/cart check
     - COVERAGE=0.25E ./gradlew -p ./monolithic/service/user check
     - COVERAGE=0.25 ./gradlew -p ./monolithic/repository/order check
