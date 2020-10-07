@@ -6,6 +6,8 @@ jdk: oraclejdk8
 
 
 env:
+  - JDK_VERSION=oraclejdk8
+  - JDK_VERSION=oraclejdk9
   - TEST_CASE=./monolithic/ui check
   - TEST_CASE=./monolithic/service/cart check
   - TEST_CASE=./monolithic/service/user check
@@ -14,14 +16,33 @@ env:
   - TEST_CASE=./monolithic/repository/product check
   - TEST_CASE=./monolithic/repository/user check
 
+stages:
+  - jdk-targets
 
-script:
-  - ./gradlew clean jar
+jobs:
+  include:
+    - stage: jdk-targets
+      name: "Test jdk 9"
+      install: skip
+      script:
+        - ./gradlew clean jar
+      after_script:
+        - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
+        - COVERAGE=0.25 ./gradlew -p $TEST_CASE
+      env:
+      - JDK_VERSION=oraclejdk9
+  include:
+    - stage: jdk-targets
+      name: "Test jdk 9"
+      install: skip
+      script:
+        - ./gradlew clean jar
+      after_script:
+        - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
+        - COVERAGE=0.25 ./gradlew -p $TEST_CASE
+      env:
+      - JDK_VERSION=oraclejdk8
 
-
-after_script:
-  - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-  - COVERAGE=0.25 ./gradlew -p $TEST_CASE
 
 
 
