@@ -11,7 +11,7 @@ test {
     }
 }
 
-before_install:
+script:
   - ./gradlew clean jar
 
 after_success:
