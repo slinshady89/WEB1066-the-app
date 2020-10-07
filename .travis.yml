@@ -1,3 +1,5 @@
+skip: install
+os: linux
 dist: trusty
 language: java
 jdk: oraclejdk8
