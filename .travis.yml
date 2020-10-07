@@ -15,7 +15,13 @@ script:
 before_deploy:
   - ./gradlew test jacocoTestCoverageVerification
 
-#deploy: skip
+deploy:
+  provider: heroku
+  api_key:
+    secure: QwlRx8L3Yt4hguhnSxW4EhSd4fCylIQPT8ON1fLuQ0Eo/+HpaD9e1BAlwSeYVxlyTqKAIF+wNUU1zIPAu1fDdNE/ZK7RseFBS//VDiEpMBada1hUaZWlp3L/yUnCzwfCUlTvTFefZTmAtjekyUTynKL76jin+Sh/AGQT/Bn6bzKnYNU1AHW3xi8zwO8KHgy3mxKiRKv6ffON35m0lmlFmJZFQOiDDCPcb0OFf0nBxckt5tzZQviQ9FZw2uGk5QQ3NfalWA/jhIijNFOdx25KvmozJ2gsM20jmN26Yzv/xmenlO2C6i5dUHOUY9IblMkWbUseZKUbkFHpm6SuZ52XMOS8ExOGovyALeqeesCSbrnl9jO0qRxV+oYqw/Yy8jx8BpJKnNnKMmVCMl90USBqqcdP3YSiXqPUJC1REl/QocFxWNmx4MLjQUvOmU00FXt9rdLtXyFAAJDFNa9s61uUlkPYTCUsIN2+oaqnhvkCI7RTZKhukIwMFBa5AehYpA29x1mDf1pXiW9P1W2weXhEwweacYUxUREzb2IMIPiePljAKDahAyPKCHcnBRvZm5Y2TJTLKr+ZrKuAgbaXbRLCQAUeUYc7533nBsAMcadIqfvxFCLzgt+LMtyJ4fK5dxrboFPU5aPiI4ibm+VG/pEcubvdiactXzE5Y0T6Ae1rR2I=
+  on: master
+  app: probot-slinshady89
+
 
 
 
