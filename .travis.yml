@@ -19,21 +19,23 @@ env:
 jobs:
   include:
     - stage:
+      jdk: $JDK_VERSION
       name: "JDK 9"
       script:
         - ./gradlew clean jar
       after_script:
-        - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-        - COVERAGE=0.99 ./gradlew -p ./monolithic/${TEST_CASE} check
+        - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
+        - COVERAGE=0.99 ./gradlew -p ./monolithic/$TEST_CASE check
       env:
         - JDK_VERSION=oraclejdk9
     - stage:
-      name: "JDK 9"
+      jdk: $JDK_VERSION
+      name: "JDK 8"
       script:
         - ./gradlew clean jar
       after_script:
-        - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-        - COVERAGE=0.99 ./gradlew -p ./monolithic/${TEST_CASE} check
+        - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
+        - COVERAGE=0.99 ./gradlew -p ./monolithic/$TEST_CASE check
       env:
         - JDK_VERSION=oraclejdk8
 
