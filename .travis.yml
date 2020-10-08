@@ -6,13 +6,13 @@ jdk: oraclejdk8
 
 
 env:
-  - TEST_CASE="./monolithic/ui check"
-  - TEST_CASE="./monolithic/service/cart check"
-  - TEST_CASE="./monolithic/service/user check"
-  - TEST_CASE="./monolithic/repository/order check"
-  - TEST_CASE="./monolithic/repository/cart check"
-  - TEST_CASE="./monolithic/repository/product check"
-  - TEST_CASE="./monolithic/repository/user check"
+  - TEST_CASE=./monolithic/ui check
+  - TEST_CASE=./monolithic/service/cart check
+  - TEST_CASE=./monolithic/service/user check
+   TEST_CASE=./monolithic/repository/order check
+  - TEST_CASE=./monolithic/repository/cart check
+  - TEST_CASE=./monolithic/repository/product check
+  - TEST_CASE=./monolithic/repository/user check
 
 script:
   - ./gradlew clean jar
