@@ -30,7 +30,7 @@ before_deploy:
 
 deploy:
   provider: script
-  all_branches: true
   script: scripts/deploy.sh
   on:
+    branch: master
     condition: $TEST_CASE = ui
