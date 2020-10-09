@@ -7,12 +7,12 @@ jdk: oraclejdk8
 
 env:
   - TEST_CASE=ui
-  # - TEST_CASE=service/cart
-  # - TEST_CASE=service/user
-  # - TEST_CASE=repository/order
-  # - TEST_CASE=repository/cart
-  # - TEST_CASE=repository/product
-  # - TEST_CASE=repository/user
+  - TEST_CASE=service/cart
+  - TEST_CASE=service/user
+  - TEST_CASE=repository/order
+  - TEST_CASE=repository/cart
+  - TEST_CASE=repository/product
+  - TEST_CASE=repository/user
 
 script:
   - ./gradlew clean jar
