@@ -20,7 +20,7 @@ jobs:
   exclude:
     env:
       - COVERAGE=1.0 AND TEST_CASE=repository/order
-      - NOT (TEST_CASE=repository/order) AND COVERAGE=0.397 
+      - NOT (TEST_CASE=repository/order) AND COVERAGE=0.397
 
 
 script:
@@ -31,6 +31,8 @@ script:
 #   - ./gradlew jacocoTestReport
 
 after_script:
+  - echo ${COVERAGE}
+  - echo ${TEST_CASE}
   - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
   - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
   - echo $TRAVIS_TEST_RESULT
