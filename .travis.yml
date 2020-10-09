@@ -18,17 +18,18 @@ env:
   - secure: mgOpuuGEVmrcfPDx8y90mmqPouVNv91MMxCQQj5FG13+THW1P+s17Weh+BueR529g1/4X9ww3UvBLnELFDYOBJDAyhA7N3aIYW8kBK1fbvQhxbu6in9TE2CuFuJf1UTKrQVM98G5P78u+tNAZ1m+YsqzqcOxEvjK8wdt5/XPOfr7NhW+/yykxWDN3MXl9iYesF+MkG4+mzcTZtUCGTl/DwDeL33Xpdty0NYNezhI5UInfIBjD0kt4bJ4J9HCUOFcbn4ObSGBqCJrjh/KvmS2i3ApRC/axpQJ/vPbo0WqNiykJzHHAEtaZsuW9KX3DTjS5UoljMnRUQxurQMFboENJv3hxkL4lV6SDNRRCJbp5e3l42bKldA4upqjQ5T20DC45w1VdI/nhOMwKS7vVGyLzdV0LDNr5EAtWZJvwqlr2hVpoaPzget6OVI69R1qgxIZo/tiois+s59ry7QwnTUtHzHk2c6q0QxhGerybHBcmmhb6sk9e7xvHC/mpgnQoRq8XmyXoUAOyOw59KUxfY+LR8gQBnJTYAD591qUrvvsYkLUac3IrCPF6pegusbftN/fSSsLGOusSUQIbJq1Rp4aZMTaHXW8KBaBVVbh/X1KCHakceAEActp3Rc7qAelHuLReoOMttDWqZ3zFeQjs8648CtAKMSv3532XsheHBxY+MM=
 script:
   - ./gradlew clean jar
+  - ./gradlew -p ./monolithic/ui packageToContainer
 after_success:
   - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
   - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
   - echo $TRAVIS_TEST_RESULT
 
 before_deploy:
-  - ./gradlew -p ./monolithic/ui packageToContainer
-
-deploy:
-  provider: script
-  on: docker_deploy
-  script: scripts/deploy.sh
-  on:
-    condition: $TEST_CASE = ui
+  -
+#
+# deploy:
+#   provider: script
+#   on: docker_deploy
+#   script: scripts/deploy.sh
+#   on:
+#     condition: $TEST_CASE = ui
