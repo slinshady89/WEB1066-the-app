@@ -28,6 +28,4 @@ before_deploy:
 deploy:
   provider: script
   all_branches: true
-  script:
-    - docker tag zutherb/monolithic-shop:latest ${DOCKER_USERNAME}/monolithic-shop:latest
-    - docker push ${DOCKER_USERNAME}/monolithic-shop:latest
+  script: scripts/deploy.sh
