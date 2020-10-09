@@ -6,21 +6,13 @@ jdk: oraclejdk8
 
 
 env:
-  - TEST_CASE=ui
-  - TEST_CASE=service/cart
-  - TEST_CASE=service/user
-  - TEST_CASE=repository/order
-  - TEST_CASE=repository/cart
-  - TEST_CASE=repository/product
-  - TEST_CASE=repository/user
-  - COVERAGE=1.0
-  - COVERAGE=0.397
-
-jobs:
-  exclude:
-    env:
-      - COVERAGE=1.0 AND TEST_CASE=repository/order
-      - NOT (TEST_CASE=repository/order) AND COVERAGE=0.397
+  - COVERAGE=1.0 TEST_CASE=ui
+  - COVERAGE=1.0 TEST_CASE=service/cart
+  - COVERAGE=1.0 TEST_CASE=service/user
+  - COVERAGE=0.397 TEST_CASE=repository/order
+  - COVERAGE=1.0 TEST_CASE=repository/cart
+  - COVERAGE=1.0 TEST_CASE=repository/product
+  - COVERAGE=1.0 TEST_CASE=repository/user
 
 
 script:
