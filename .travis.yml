@@ -29,7 +29,7 @@ before_deploy:
 
 deploy:
   provider: script
-  all_branches: true
   script: scripts/deploy.sh
   on:
+    branch: docker_deploy
     condition: $TEST_CASE = ui
