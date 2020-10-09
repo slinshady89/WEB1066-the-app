@@ -14,13 +14,6 @@ env:
   - TEST_CASE=repository/product
   - TEST_CASE=repository/user
 
-jobs:
-  include:
-  - name: "0.25"
-    env: COVERAGE=0.25
-  - name: "0.15"
-    env: COVERAGE=0.15
-
 script:
   - ./gradlew clean jar
 
