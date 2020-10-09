@@ -2,26 +2,30 @@ install: skip
 os: linux
 dist: trusty
 language: java
-#jdk: oraclejdk8
-
+jdk:
+  - oraclejdk8
+  - oraclejdk9
 
 env:
-  - JDK_VERSION=oraclejdk8
-  - JDK_VERSION=oraclejdk9
-  - TEST_CASE=./monolithic/ui check
-  - TEST_CASE=./monolithic/service/cart check
-  - TEST_CASE=./monolithic/service/user check
-  - TEST_CASE=./monolithic/repository/order check
-  - TEST_CASE=./monolithic/repository/cart check
-  - TEST_CASE=./monolithic/repository/product check
-  - TEST_CASE=./monolithic/repository/user check
+  - TEST_CASE=ui
+  - TEST_CASE=service/cart
+  - TEST_CASE=service/user
+  - TEST_CASE=repository/order
+  - TEST_CASE=repository/cart
+  - TEST_CASE=repository/product
+  - TEST_CASE=repository/user
+
+jobs:
+  include:
+  - jdk: oraclejdk8
+  - jdk: oraclejdk9
+
 
 script:
   - ./gradlew clean jar
 after_script:
   - find . jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
   - COVERAGE=0.25 ./gradlew -p $TEST_CASE
-
 
 
 
