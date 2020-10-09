@@ -25,7 +25,8 @@ after_success:
   - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
   - echo $TRAVIS_TEST_RESULT
 
-before_deploy:  
+before_deploy:
+  - docker login -u="$DOCKER_USERNAME" -p="DOCKER_PASSWORD"
   - ./gradlew -p ./monolithic/ui packageToContainer
 
 deploy:
