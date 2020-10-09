@@ -19,11 +19,8 @@ env:
 jobs:
   exclude:
     env:
-      - COVERAGE=1.0
-      - TEST_CASE=repository/order
-    env:
-      - COVERAGE=0.397
-      - NOT TEST_CASE=repository/order
+      - COVERAGE=1.0 AND TEST_CASE=repository/order
+      - NOT (TEST_CASE=repository/order) AND COVERAGE=0.397 
 
 
 script:
