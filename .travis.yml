@@ -28,6 +28,7 @@ deploy:
   provider: script
   script: >-
     bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin" &&
+    docker pull zutherb/monolithic-shop:latest &&
     ./gradlew -p ./monolithic/ui packageToContainer &&
     ./scripts/deploy.sh
   on:
