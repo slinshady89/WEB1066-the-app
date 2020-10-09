@@ -28,9 +28,9 @@ deploy:
   provider: script
   script: >-
     bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin";
-    # docker pull zutherb/monolithic-shop:latest;
     ./gradlew -p ./monolithic/ui packageToContainer;
-    ./scripts/deploy.sh
+    docker tag zutherb/monolithic-shop:latest ${DOCKER_USERNAME}/monolithic-shop:latest;
+    docker push ${DOCKER_USERNAME}/monolithic-shop:latest
   on:
-    branch: docker_deploy
+    all_branches: true
     condition: $TEST_CASE = ui
