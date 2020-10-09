@@ -1,8 +1,8 @@
 install: skip
 os: linux
-dist: trusty
+dist: xenial
 language: java
-jdk: oraclejdk8
+jdk: openjdk8
 
 script:
   - ./gradlew clean jar
