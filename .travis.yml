@@ -25,12 +25,12 @@ after_success:
   - echo $TRAVIS_TEST_RESULT
 
 before_deploy:
-  - docker login -u="$DOCKER_USERNAME" -p="DOCKER_PASSWORD"
+  - bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
   - ./gradlew -p ./monolithic/ui packageToContainer
 
 deploy:
   provider: script
+  all_branches: true
   script: scripts/deploy.sh
   on:
-    branch: master
     condition: $TEST_CASE = ui
