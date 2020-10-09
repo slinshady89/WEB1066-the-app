@@ -23,14 +23,15 @@ after_success:
   - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
   - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
   - echo $TRAVIS_TEST_RESULT
+  - ./gradlew -p ./monolithic/ui packageToContainer
 
 before_deploy:
-  - docker login -u="$DOCKER_USERNAME" -p="DOCKER_PASSWORD"
+  - bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
   - ./gradlew -p ./monolithic/ui packageToContainer
 
 deploy:
   provider: script
   script: scripts/deploy.sh
   on:
-    branch: master
+    branch: docker_deploy
     condition: $TEST_CASE = ui
