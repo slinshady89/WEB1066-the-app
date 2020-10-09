@@ -3,36 +3,20 @@ os: linux
 dist: trusty
 language: java
 jdk: oraclejdk8
-
-
 env:
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/ui check"
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/service/cart check"
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/service/user check"
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/repository/order check"
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/repository/cart check"
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/repository/product check"
-  - TEST_CASE="COVERAGE=0.25 ./gradlew -p ./monolithic/repository/user check"
-
+  matrix:
+  - TEST_CASE=ui
+  - TEST_CASE=service/cart
+  - TEST_CASE=service/user
+  - TEST_CASE=repository/order
+  - TEST_CASE=repository/cart
+  - TEST_CASE=repository/product
+  - TEST_CASE=repository/user
+  global:
+  - secure: rt5r4Yfex8qrTyYxfaHjbVJ9R+0EGYcURf9CXIBky05UQUnGMTFL78I5BEGzP3h2jP31EPsDI1AEh7Isw7peKBiONK5lKzPBnNflOlCMDSi5dKbU+TTd7uNh8Us/d3FqR5KzoE1CCaKdlfzqLSPIpCy4C0mPre83s29AmJp711AffJyUZ8GKwWOLuwwAmu8Q5gsu1uK/YsnRrxxeabP4tI29ahLmmmyp8QPisMRfOa6KVmi4lGddFDOalv2f2/xtbCJ2LUh7h3tnTV2nX2TXi5plvrC/V89zx4/6mTwx/4b852yiRUEemWguhZtn3CIQl/615k2i7JRVA5qKkMO5IHHXi7ksnz+aIXWUzOjYrApLXjcsBu2ngl6/130VyXzGcjCOSUo1glr6LuPqWBO7qZucOkDvcd8gvYDSuKPQRxLnIKWm6L6FKS/5wNF8O/iHGNvCqD1oK3hEI19UR6WYJ8oV60Lt6rURADGGaLprIpBRM8KnVsEGKBeA86GePj47Xcc3XRoeUPEMQ4z8DUA1HIHB6m8wipCcfdTkh5DHgnRl6C3rBt+3oqw3YonFT0ASMGAO3X4vaBfHYbGLIs4N4G73gdYbNt2sO4u+BLaIbtKti19PmCHT4x9K/wijlxf4NfAzIyctChA+ocmvZs4dqmsOgI4BOFSthXCRWgFvb3k=
+  - secure: HUjlpBRJQnwKu2j0YQ84YXsVCPhK52Kf//uIvD2QPqAj+0qESgjZ4saP47eDCTzhMEbNsCJ9t1uqA4rMUHKytg68KESkJ0R+y5Q5BRL2DjlNrRkLuWbKwVAZtUL5m1t9S68JU/HqKkA1ib1+CIrFJldgfdRY+SCcmOvFRJ6SQWMrSsumjSOIHF3ycrq/EgOKzRcOmrxrFDSQfd0fWquatRjoUbSUaLlvZOLg5Ad+ls72Gd9PIk+gYN1wXjWgY+jxvePJmCMtRETUt97q/p6nTYnjZYelxC7Wqqjpp9pgsSNaCdim5OFGjcYmd44vExkyVOmvEoswHaEDyZfS3aEiAcMh7Qi6RFteueDVWFCPFgDVewkx0Q/NLkoloVUQ2Z5Ps/5yEyfsJlpMJEF49wr98Ylx2EzhjqqPTlm2VD7jmif1nhupxrT6I4k5P0FqO1NkIkNp1ZAwehjfSC+rHOL/75Kma0VjBwX69Fp3C015/Ds7pg8PYZdYNDE0/hZucOxq545q/lc/7/2J3XKmWvj649Gy0bKtSXv07sRMRf85sp1QotLC2ptCGB4YutRagDDasnZYElucWXjAiMvw8P5o/4DQfQTqp/2/0Py5M0kHk0FHVWRspFMeX7rlVqKIEEltJ6asbPNHQT/4sWkDOpCrGnaa+CSrHAc3WrCMdrLND+U=
 script:
-  - ./gradlew clean jar
-
-# after_success:
-#   - ./gradlew check
-#   - ./gradlew jacocoTestReport
-
+- "./gradlew clean jar"
 after_script:
-  - echo ${TEST_CASE}
-  - ${TEST_CASE}
-  - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-
-
-
-
-#script:
-  # Run ANSIBLE checks
-  # - ANSIBLE0008: Disabled for use of sudo warnings - to address
-  # - ANSIBLE0011: Disabled for all tasks which should be named
-  # - ANSIBLE0012: Disabled (should not change if nothings needs doing) - to address
-  # - ANSIBLE0013: Disabled - few uses of shell commands - to address
-  #- find vagrant/provision -name "*.yml" -exec ansible-lint -x ANSIBLE008,ANSIBLE0011,ANSIBLE0012,ANSIBLE0013  {} +
+- COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
+- find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
