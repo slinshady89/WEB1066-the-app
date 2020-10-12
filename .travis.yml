@@ -21,12 +21,6 @@ env:
 script:
 - "./gradlew clean jar"
 
-deploy:
-  - provider: script
-    script: scripts/deploy.sh
-    on:
-      all_branches: true
-
 after_script:
 - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
 - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
