@@ -25,7 +25,7 @@ jobs:
     stage: deploy
     deploy:
       - provider: script
-        script: echo "WIP"
+        script: scripts/deploy.sh
         on:
           all_branches: true
 
