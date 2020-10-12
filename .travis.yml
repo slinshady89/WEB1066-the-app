@@ -14,9 +14,10 @@ after_success:
   - ./gradlew test jacocoTestCoverageVerification
 
 deploy:
-  provider: script
-  script: bash scripts/deploy.sh
-
+  - provider: script
+    script: scripts/deploy.sh
+    on:
+      all_branches: true
 
 
 #script:
