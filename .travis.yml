@@ -22,11 +22,8 @@ install:
 #   - ./gradlew jacocoTestReport
 
 after_success:
-  - echo ${COVERAGE}
-  - echo ${TEST_CASE}
   - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
   - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-  - echo $TRAVIS_TEST_RESULT
 
 
 #script:
