@@ -1,21 +1,20 @@
-install: skip
 os: linux
 dist: trusty
 language: java
 jdk: oraclejdk8
 
-script:
+install:
   - ./gradlew clean jar
 
 after_success:
   - ./gradlew test
   - ./gradlew jacocoTestReport
   - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-  - COVERAGE=0.318 /gradlew test jacocoTestCoverageVerification
+  - COVERAGE=0.3 /gradlew test jacocoTestCoverageVerification
 
 deploy:
   provider: script
-  script: bash scripts/deploy.sh
+  script: echo "WIP"
 
 
 
