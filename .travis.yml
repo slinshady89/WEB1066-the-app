@@ -1,4 +1,3 @@
-install: skip
 os: linux
 dist: trusty
 language: java
@@ -12,17 +11,17 @@ env:
   - COVERAGE=0.397 TEST_CASE=repository/order
   - COVERAGE=1.0 TEST_CASE=repository/cart
   - COVERAGE=1.0 TEST_CASE=repository/product
-  - COVERAGE=1.0 TEST_CASE=repository/user
+  - COVERAGE=0.3 TEST_CASE=repository/user
 
 
-script:
+install:
   - ./gradlew clean jar
 
 # after_success:
 #   - ./gradlew check
 #   - ./gradlew jacocoTestReport
 
-after_script:
+after_success:
   - echo ${COVERAGE}
   - echo ${TEST_CASE}
   - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
