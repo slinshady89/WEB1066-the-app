@@ -7,7 +7,7 @@ jdk: oraclejdk8
 install:
   - ./gradlew clean jar
 
-after_success:
+script:
   - ./gradlew test
 
 
