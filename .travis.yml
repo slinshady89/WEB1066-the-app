@@ -20,14 +20,11 @@ env:
 script:
 - "./gradlew clean jar"
 
-jobs:
-  include:
-    stage: deploy
-    deploy:
-      - provider: script
-        script: scripts/deploy.sh
-        on:
-          all_branches: true
+deploy:
+  - provider: script
+    script: scripts/deploy.sh
+    on:
+      all_branches: true
 
 after_script:
 - COVERAGE=${COVERAGE} ./gradlew -p ./monolithic/${TEST_CASE} check
