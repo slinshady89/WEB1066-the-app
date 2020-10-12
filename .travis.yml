@@ -28,7 +28,6 @@ jobs:
       env:
         - JDK_VERSION=oraclejdk8
 
-
 install:
   - ./gradlew clean jar
 script:
